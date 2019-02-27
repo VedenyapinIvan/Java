@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+}
+
+group 'convert'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+allprojects {
+    buildscript {
+        ext {
+            springBootVersion = '2.1.0.RELEASE'
+            tomcatVersion = '9.0.12'
+            springVersion = '5.1.2.RELEASE'
+            mqVersion = '9.0.5.0'
+            grpcVersion = '1.18.0'
+            gpgpVersion = '0.8.8'
+        }
+        repositories {
+//            maven { url "http://sbtnexus.ca.sbrf.ru:8081/nexus/content/repositories/public/" }
+        }
+        dependencies {
+            classpath "org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion"
+        }
+    }
+    repositories {
+        mavenCentral()
+    }
+}

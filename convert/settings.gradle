@@ -1,0 +1,8 @@
+pluginManagement {
+    repositories {
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'convert'
+include 'convert-module'
