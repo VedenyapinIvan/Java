@@ -1,11 +1,9 @@
-pluginManagement{
-    repositories{
-        mavenCentral()
+pluginManagement {
+    repositories {
         mavenLocal()
     }
 }
 
 rootProject.name = 'convert'
-include 'convert-dto'
 include 'convert-module'
-
+include 'convert-dto'

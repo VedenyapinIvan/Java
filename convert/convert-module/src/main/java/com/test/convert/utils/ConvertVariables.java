@@ -10,12 +10,9 @@ public class ConvertVariables {
 
     @Value(value = "${convert.direction.in}")
     public String inDIR;
-    @Value(value = "${convert.direction.out}")
-    public String outDIR;
-    @Value(value = "${convert.direction.failed}")
-    public String failedDIR;
 
     public ArrayList<String> fileList = new ArrayList<>();
+    //TODO use for sending mail
     public ArrayList<String> fileSuccessList = new ArrayList<>();
     public ArrayList<String> fileFailedList = new ArrayList<>();
 }

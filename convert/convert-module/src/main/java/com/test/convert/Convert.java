@@ -1,6 +1,5 @@
 package com.test.convert;
 
-import com.test.convert.action.ConvertDB;
 import com.test.convert.utils.ConvertReform;
 import com.test.convert.utils.ConvertVariables;
 import org.apache.log4j.LogManager;
@@ -10,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
+
 import java.io.File;
 import java.util.ArrayList;
 
@@ -22,8 +22,6 @@ public class Convert {
         SpringApplication.run(Convert.class, args);
     }
 
-//    @Autowired
-//    private ConvertDB convertDB;
     @Autowired
     private ConvertVariables var;
     @Autowired
@@ -52,6 +50,7 @@ public class Convert {
         logger.info("Success refresh filesList with size=" + var.fileList.size());
     }
 
+    //TODO make sending email
     @Scheduled(cron = "${convert.cron.sendMail}")
     public void sendMail() {
         logger.info("Start sendMail ... ");
@@ -60,35 +59,22 @@ public class Convert {
     @Scheduled(fixedDelay = 1000)
     public void loadFile() {
         if (var.fileList.size() != 0) {
-
-            File oldFile;
-            File newFile;
-            if (reform.validateXMLSchema(var.fileList.get(0))) {
-                ConvertFile convertFile = reform.convertToObject(var.fileList.get(0));
-
-//                System.out.println("Сообщение валидно");
-                oldFile = new File(var.fileList.get(0));
-                newFile = new File(var.outDIR + oldFile.getName());
-
+            try {
+                reform.validateXMLSchemaAndInsert(var.fileList.get(0));
+            } catch (Exception e) {
+                logger.info("ValidateXMLSchemaAndInsert failed " + e.getMessage());
+            }
+            finally {
+                //TODO with win7 any time failed remove
                 System.gc();
-                oldFile.renameTo(newFile);
-
+            }
+            logger.info("File " + var.fileList.get(0) + " remove");
+            try {
+                new File(var.fileList.get(0)).delete();
+            }
+            finally {
+                System.gc();
                 var.fileList.remove(0);
-                System.gc();
-                oldFile.delete();
-            } else {
-//                logger.info("File " + var.fileList.get(0) + " is`n valid");
-                oldFile = new File(var.fileList.get(0));
-                newFile = new File(var.failedDIR + oldFile.getName());
-
-                System.gc();
-                oldFile.renameTo(newFile);
-
-                var.fileList.remove(0);
-
-                System.gc();
-                oldFile.delete();
-
             }
         }
     }
