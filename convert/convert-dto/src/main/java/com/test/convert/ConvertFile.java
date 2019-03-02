@@ -24,4 +24,8 @@ public class ConvertFile {
 
     public ConvertFile() {
     }
+
+    public String getId() {
+        return this.id;
+    }
 }
