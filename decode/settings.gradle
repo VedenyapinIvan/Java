@@ -1,0 +1,5 @@
+rootProject.name = 'decode'
+
+include 'decode-module'
+include 'decode-api'
+

@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "com.google.protobuf:protobuf-gradle-plugin:${gpgpVersion}"
+    }
+}
+
+group 'decode'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'com.google.protobuf'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile group: 'io.grpc', name: 'grpc-core', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-stub', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-protobuf', version: grpcVersion
+}
+
+sourceSets.main.java.srcDirs = ['src/main/java', 'src/main/grpc']
+
+protobuf {
+    generatedFilesBaseDir = "$projectDir/src"
+    protoc {
+        artifact = "com.google.protobuf:protoc:3.6.1:windows-x86_64:exe"
+//        artifact = "com.google.protobuf:protoc:3.6.1"
+    }
+    plugins {
+        grpc {
+//            artifact = "io.grpc:protoc-gen-grpc-java:1.13.1:windows-x86_64:exe"
+            artifact = "io.grpc:protoc-gen-grpc-java:1.17.1"
+        }
+    }
+    generateProtoTasks {
+        all()*.plugins {
+            grpc {}
+        }
+    }
+}

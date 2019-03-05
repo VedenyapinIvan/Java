@@ -1,0 +1,22 @@
+group 'decode'
+version '1.0-SNAPSHOT'
+
+//apply plugin: 'java'
+ext {
+    springBootVersion = '2.1.0.RELEASE'
+    grpcVersion = '1.18.0'
+    gpgpVersion = '0.8.8'
+}
+
+//sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+subprojects {
+    repositories {
+        mavenLocal()
+    }
+}
+
