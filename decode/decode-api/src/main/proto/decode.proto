@@ -1,0 +1,34 @@
+syntax = "proto3";
+option java_multiple_files = true;
+
+package com.test.DecodeApi;
+
+service DecodeApi {
+    rpc getDecodeValue (DecodeServiceRq) returns (DecodeServiceRs);
+}
+
+message DecodeServiceRq {
+    string Question = 1;
+    string DateTime = 2;
+}
+
+message DecodeServiceRs {
+    string Answer = 1;
+    Status Status = 2;
+    string DateTime = 3;
+}
+
+message Status {
+    int32 Code = 1;
+    string ShortDescription = 2;
+    string FullDescription = 3;
+    repeated DetailedStatus AdditionalInfo = 4;
+}
+
+message DetailedStatus {
+    int32 Code = 1;
+    string Name = 2;
+    string Description = 3;
+}
+
+
