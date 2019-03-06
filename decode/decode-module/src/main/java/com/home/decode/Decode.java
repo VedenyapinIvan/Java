@@ -9,9 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SnpDecode implements CommandLineRunner {
 
-    //@Autowired
-    //DataSource dataSource;
-
     @Autowired
     CustomerRepository customerRepository;
 
@@ -21,12 +18,8 @@ public class SnpDecode implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        System.out.println("Display count row with rqUID=9244bd9aabaf48a28752e62461f0f011: " + customerRepository.findAll());
-
+        System.out.println("Display count row: " + customerRepository.findAll());
         System.out.println("Done!");
-
-        // exit(0);
     }
 }
 
