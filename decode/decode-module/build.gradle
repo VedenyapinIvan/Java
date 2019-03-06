@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        mavenLocal()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.9.RELEASE'
+        classpath 'org.springframework.boot:spring-boot-starter-jdbc:1.5.9.RELEASE'
+        // classpath 'com.oracle:ojdbc6:11.2.0.3'
+        classpath 'io.github.longnet:grpc-spring-boot-starter:2.1.0'
+    }
+}
+
+group 'snp-decode'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+
+
+//version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+targetCompatibility = 1.8
+
+dependencies {
+    compile group: 'decode', name: 'decode-api', version: '1.0-SNAPSHOT'
+    compile project(":decode-api")
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: '1.5.9.RELEASE'
+    // compile group: 'com.oracle', name: 'ojdbc6', version: '11.2.0.3'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-jdbc', version: '1.5.9.RELEASE'
+    compile group: 'io.github.longnet', name: 'grpc-spring-boot-starter', version: '2.1.0'
+    
+    compile group: 'io.grpc', name: 'grpc-core', version: '1.18.0'
+    compile group: 'io.grpc', name: 'grpc-stub', version: '1.18.0'
+    compile group: 'io.grpc', name: 'grpc-protobuf', version: '1.18.0'
+    compile group: 'io.grpc', name: 'grpc-netty', version: '1.18.0'
+    compile group: 'io.grpc', name: 'grpc-services', version: '1.11.0'
+    compile group: 'io.netty', name: 'netty-codec-http2', version: '4.1.32.Final'
+    
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
