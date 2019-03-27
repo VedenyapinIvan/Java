@@ -1,0 +1,43 @@
+---
+# local
+spring:
+  profiles: default
+  datasource:
+    continue-on-error: true
+    url: jdbc:h2:mem:default;
+    username: default
+    password: default
+    driver-class-name: org.h2.Driver
+    schema: schema.sql
+    data: data.sql
+    sql-script-encoding: UTF-8
+  h2:
+    console:
+      enabled: true
+logging:
+  level:
+    root: INFO
+decode:
+  cache:
+    maximumSize: 100 # object
+    expireAfterWrite: 60 # minutes
+    level: 1 # autoload
+
+---
+# production
+spring:
+  profiles: production
+  datasource:
+    continue-on-error: true
+    url: ${jdbcUrl}
+    username: ${jdbcUsername}
+    password: ${jdbcPassword}
+    driver-class-name: oracle.jdbc.OracleDriver
+logging:
+  level:
+    root: INFO
+decode:
+  cache:
+    maximumSize: ${cacheMaximumSize} # object
+    expireAfterWrite: ${cacheExpireAfterWrite} # minutes
+    level: ${cacheLevel} # autoload
