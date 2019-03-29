@@ -1,9 +1,9 @@
-package com.home.decode.tls;
+package ru.via.decode.tls;
 
-import com.home.decode.DecodeApiGrpc;
-import com.home.decode.DecodeServiceRq;
-import com.home.decode.DecodeServiceRs;
-import com.home.decode.Status;
+import ru.via.decode.DecodeApiGrpc;
+import ru.via.decode.DecodeServiceRq;
+import ru.via.decode.DecodeServiceRs;
+import ru.via.decode.Status;
 import io.grpc.*;
 import io.grpc.netty.GrpcSslContexts;
 import io.grpc.netty.NettyServerBuilder;
