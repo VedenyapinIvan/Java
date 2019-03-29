@@ -1,0 +1,39 @@
+buildscript {
+    repositories {
+        mavenLocal()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+        classpath 'com.bmuschko:gradle-docker-plugin:4.0.2'
+    }
+}
+
+group 'snp-decode'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+//apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+def nettyTcNativeVersion = '2.0.19.Final'
+
+dependencies {
+    compile project(":snp-decode-api")
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-configuration-processor', version: springBootVersion
+    compile group: 'io.grpc', name: 'grpc-core', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-stub', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-protobuf', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-netty', version: grpcVersion
+    compile group: 'io.grpc', name: 'grpc-services', version: '1.11.0'
+    compile group: 'io.netty', name: 'netty-tcnative-boringssl-static', version: nettyTcNativeVersion
+    compile group: 'io.netty', name: 'netty-codec-http2', version: '4.1.32.Final'
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.22'
+    compile 'org.slf4j:slf4j-api:1.7.26'
+
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+}
